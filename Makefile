@@ -8,6 +8,9 @@
 #     * Xcode.app
 # to /Applications before proceeding.
 
+# Put additional big packages (e.g. printer drivers)
+# in  ~/Documents/packages.10.12/ before running
+
 OSX := /Applications/Install macOS Sierra.app
 AUTODMG := /Applications/AutoDMG.app/Contents/MacOS/AutoDMG
 OUTPUT := $(shell date +%Y%m%d).osx.10.12.adminadmin.dmg
@@ -19,20 +22,26 @@ prepare:
 	sudo pmset -a displaysleep 180
 	$(AUTODMG) update
 
+custompkg/custom.pkg:
+	cd custompkg && make
+
 $(OUTPUT): prepare custompkg/custom.pkg
 	-$(AUTODMG) \
 		--log-level 7 \
 		--logfile - \
 		build \
 		-n "root" \
-		-u -U \ -o /tmp/output.dmg \
+		-u -U \
+		-o /tmp/output.dmg \
 		"$(OSX)" \
 		/Applications/Xcode.app \
 		/Applications/AutoDMG.app \
 		/Applications/CreateUserPkg.app \
 		"$(OSX)" \
-		$(PWD)/pkgs/*.pkg \
+		~/Documents/packages.$(shell sw_vers -productVersion)/*.pkg \
+		$(PWD)/custompkg/custom.pkg \
+		$(PWD)/pkgs/*.pkg && \
 		cp /tmp/output.dmg $(PWD)/$@
 
 clean:
-	rm custompkg/custom.pkg
+	rm -f *.dmg /tmp/output.dmg custompkg/*.pkg

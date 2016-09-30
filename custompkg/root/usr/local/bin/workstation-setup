@@ -6,6 +6,10 @@ sudo xcodebuild -license accept
 # enable fde
 sudo fdesetup enable
 
+# disable hibernate
+sudo rm /private/var/vm/sleepimage
+sudo pmset -a hibernatemode 0
+
 # enable application firewall
 sudo defaults write /Library/Preferences/com.apple.alf globalstate -int 1
 sudo defaults write /Library/Preferences/com.apple.alf loggingenabled -bool true
@@ -22,24 +26,52 @@ sudo defaults write /Library/Preferences/com.apple.SoftwareUpdate AutomaticCheck
 sudo defaults write /Library/Preferences/com.apple.commerce AutoUpdate -bool TRUE
 sudo defaults write /Library/Preferences/com.apple.commerce AutoUpdateRestartRequired -bool TRUE
 
+# disable guest user account
+sudo defaults write /Library/Preferences/com.apple.AppleFileServer guestAccess -bool false
+sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server AllowGuestAccess -bool false
+
+# black like my soul
+defaults write NSGlobalDomain AppleInterfaceStyle Dark
+# hide menu bar
+defaults write NSGlobalDomain _HIHideMenuBar -bool true
+
+# dock on left
+defaults write com.apple.dock orientation left
+# autohide dock
+defaults write com.apple.dock autohide -bool true
+
+# do not save to icloud drive by default
+defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool FALSE
+
+# airdrop on all interfaces
+defaults write com.apple.NetworkBrowser BrowseAllInterfaces -bool true
+
 # disable spotlight search spyware ugh thx
 defaults write com.apple.lookup.shared LookupSuggestionsDisabled -int 1
 defaults write com.apple.Safari UniversalSearchEnabled -int 0
 
 # show battery percentage
 defaults write com.apple.menuextra.battery ShowPercent -bool TRUE
-# FIXME CHECK
-# +    "com.apple.menuextra.battery" =     {
-# +        ShowPercent = YES;
-# +    };
 
 # ask for password after 5 seconds of screen saver
 defaults write com.apple.screensaver askForPassword -int 1
-defaults write com.apple.screensaver askForPasswordDelay -int 5
+defaults write com.apple.screensaver askForPasswordDelay -int 30
 
 # bottom right corner to lock screen
 defaults write com.apple.dock "wvous-br-corner" -int 5
 defaults write com.apple.dock "wvous-br-modifier" -int 0
+
+# 2 minute screensaver activation
+defaults write com.apple.screensaver idleTime -int 600
+
+# terminal
+# utf8 only
+defaults write com.apple.Terminal StringEncodings -array 4
+# close window if shell exited cleanly
+defaults write com.apple.Terminal ShellExitAction 2
+defaults write com.apple.Terminal FontAntialias 1
+defaults write com.apple.Terminal "Default Window Settings" "Pro"
+defaults write com.apple.Terminal "Startup Window Settings" "Pro"
 
 # New Finder windows use ~
 defaults write com.apple.finder NewWindowTarget -string "PfHm"
@@ -58,11 +90,30 @@ defaults write com.apple.menuextra.clock DateFormat -string 'EEE MMM d  H:mm:ss'
 defaults write -g InitialKeyRepeat -int 15 # normal minimum is 15 (225 ms)
 defaults write -g KeyRepeat -int 1 # normal minimum is 2 (30 ms)
 
+# safari debug stuff
+defaults write com.apple.Safari IncludeDevelopMenu -bool true
+defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true
+defaults write com.apple.Safari "com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled" -bool true
+defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
+
+
 # install three python modules systemwide, that's all
 # do the rest with pip install --user in homedir
 sudo easy_install pip
 sudo /usr/local/bin/pip install virtualenv
 sudo /usr/local/bin/pip install awscli
+
+# set default inputrc:
+cat > ~/.inputrc <<EOF
+set show-all-if-ambiguous on
+set completion-ignore-case on
+set completion-prefix-display-length 4
+Control-j: menu-complete
+Control-k: menu-complete-backward
+set show-all-if-unmodified on
+set completion-map-case on
+set horizontal-scroll-mode Off
+EOF
 
 # install homebrew under homedir
 if [[ ! -d ~/Library/Homebrew ]]; then
@@ -97,11 +148,27 @@ touch ~/Library/profile.d/keep.sh
 fi
 
 # install homebrew path
-if [[ ! -e ~/Library/profile.d/100homebrew.sh ]]; then
-    mkdir -p ~/Library/profile.d
+if [[ ! -e ~/Library/bashrc.d/100homebrew.sh ]]; then
+    mkdir -p ~/Library/bashrc.d
     echo 'export PATH+=":~/Library/Homebrew/bin"' > \
-        ~/Library/profile.d/100homebrew.sh
+        ~/Library/bashrc.d/100homebrew.sh
+    echo 'export PATH+=":~/Library/Homebrew/sbin"' >> \
+        ~/Library/bashrc.d/100homebrew.sh
+    echo 'export HOMEBREW_NO_ANALYTICS=1' >> \
+        ~/Library/bashrc.d/100homebrew.sh
+    echo 'export HOMEBREW_CASK_OPTS="--appdir=~/Applications"' > \
+        ~/Library/bashrc.d/100homebrewcaskdir.sh
 fi
+
+echo 'export PS1=\'\u@\h:\w\\$ \'' > ~/Library/bashrc.d/000.ps1.sh
+
+cat > ~/Library/bashrc.d/200.git-prompt.sh <<'EOF'
+if [ -f "$(brew --prefix bash-git-prompt)/share/gitprompt.sh" ]; then
+  GIT_PROMPT_THEME=Default
+  GIT_PROMPT_ONLY_IN_REPO=1
+  source "$(brew --prefix bash-git-prompt)/share/gitprompt.sh"
+fi
+EOF
 
 # set homebrew path:
 source ~/.profile
@@ -110,13 +177,18 @@ if [[ ! -d ~/Applications ]]; then
     mkdir -p ~/Applications
 fi
 
-export HOMEBREW_CASK_OPTS="--appdir=~/Applications"
 brew tap caskroom/cask
 
 CASKS="
+	github-desktop
 	google-chrome
 	google-drive
+	gpgtools
+	iterm2
+	keepassx
+	lastpass
 	slack
+	sublime-text
 "
 
 for CASK in $CASKS ; do
@@ -129,6 +201,7 @@ HOMEBREW_PKGS="
 	autoconf
 	automake
 	bash-completion
+	bash-git-prompt
 	bonnie++
 	byobu
 	cmake
@@ -150,6 +223,7 @@ HOMEBREW_PKGS="
 	gnupg2
 	go
 	gpg-agent
+	homebrew/dupes/rsync
 	irssi
 	jq
 	keybase
@@ -166,7 +240,6 @@ HOMEBREW_PKGS="
 	pv
 	pwgen
 	python3
-	rsync
 	socat
 	sox
 	speedtest_cli
