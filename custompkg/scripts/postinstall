@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# disable firstboot/oobe prompts
+touch "$3"/var/db/.AppleDiagnosticsSetupDone
+touch "$3"/var/db/.AppleSetupDone
+
+chmod a+rx "$3"/usr/local/bin/*
