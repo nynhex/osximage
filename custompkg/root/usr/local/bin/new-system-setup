@@ -1,0 +1,37 @@
+#!/bin/bash
+
+# make xcode shut up and give us build tools
+sudo xcodebuild -license accept
+
+# enable fde
+sudo fdesetup enable
+
+# disable hibernate
+sudo rm /private/var/vm/sleepimage
+sudo pmset -a hibernatemode 0
+
+# enable application firewall
+sudo defaults write /Library/Preferences/com.apple.alf globalstate -int 1
+sudo defaults write /Library/Preferences/com.apple.alf loggingenabled -bool true
+sudo defaults write /Library/Preferences/com.apple.alf stealthenabled -bool false
+
+# hush time machine
+sudo defaults write /Library/Preferences/com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
+
+# update software
+sudo softwareupdate -i -a
+
+# enable all autoupdates
+sudo defaults write /Library/Preferences/com.apple.SoftwareUpdate AutomaticCheckEnabled -bool TRUE
+sudo defaults write /Library/Preferences/com.apple.commerce AutoUpdate -bool TRUE
+sudo defaults write /Library/Preferences/com.apple.commerce AutoUpdateRestartRequired -bool TRUE
+
+# disable guest user account
+sudo defaults write /Library/Preferences/com.apple.AppleFileServer guestAccess -bool false
+sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server AllowGuestAccess -bool false
+
+# install three python modules systemwide, that's all
+# do the rest with pip install --user in homedir
+sudo easy_install pip
+sudo /usr/local/bin/pip install virtualenv
+sudo /usr/local/bin/pip install awscli

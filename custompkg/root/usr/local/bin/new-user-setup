@@ -1,109 +1,58 @@
 #!/bin/bash
-
-# make xcode shut up and give us build tools
-sudo xcodebuild -license accept
-
-# enable fde
-sudo fdesetup enable
-
-# disable hibernate
-sudo rm /private/var/vm/sleepimage
-sudo pmset -a hibernatemode 0
-
-# enable application firewall
-sudo defaults write /Library/Preferences/com.apple.alf globalstate -int 1
-sudo defaults write /Library/Preferences/com.apple.alf loggingenabled -bool true
-sudo defaults write /Library/Preferences/com.apple.alf stealthenabled -bool false
-
-# hush time machine
-sudo defaults write /Library/Preferences/com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
-
-# update software
-sudo softwareupdate -i -a
-
-# enable all autoupdates
-sudo defaults write /Library/Preferences/com.apple.SoftwareUpdate AutomaticCheckEnabled -bool TRUE
-sudo defaults write /Library/Preferences/com.apple.commerce AutoUpdate -bool TRUE
-sudo defaults write /Library/Preferences/com.apple.commerce AutoUpdateRestartRequired -bool TRUE
-
-# disable guest user account
-sudo defaults write /Library/Preferences/com.apple.AppleFileServer guestAccess -bool false
-sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server AllowGuestAccess -bool false
-
+###################################### Configure sane user preference defaults
 # black like my soul
 defaults write NSGlobalDomain AppleInterfaceStyle Dark
 # hide menu bar
 defaults write NSGlobalDomain _HIHideMenuBar -bool true
-
 # dock on left
 defaults write com.apple.dock orientation left
 # autohide dock
 defaults write com.apple.dock autohide -bool true
-
 # do not save to icloud drive by default
 defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool FALSE
-
 # airdrop on all interfaces
 defaults write com.apple.NetworkBrowser BrowseAllInterfaces -bool true
-
 # disable spotlight search spyware ugh thx
 defaults write com.apple.lookup.shared LookupSuggestionsDisabled -int 1
 defaults write com.apple.Safari UniversalSearchEnabled -int 0
-
 # show battery percentage
 defaults write com.apple.menuextra.battery ShowPercent -bool TRUE
-
 # ask for password after 5 seconds of screen saver
 defaults write com.apple.screensaver askForPassword -int 1
 defaults write com.apple.screensaver askForPasswordDelay -int 30
-
 # bottom right corner to lock screen
 defaults write com.apple.dock "wvous-br-corner" -int 5
 defaults write com.apple.dock "wvous-br-modifier" -int 0
-
-# 2 minute screensaver activation
+# 10 minute screensaver activation
 defaults write com.apple.screensaver idleTime -int 600
-
-# terminal
-# utf8 only
+# terminal utf8 only
 defaults write com.apple.Terminal StringEncodings -array 4
-# close window if shell exited cleanly
+# close terminal window if shell exited cleanly
 defaults write com.apple.Terminal ShellExitAction 2
 defaults write com.apple.Terminal FontAntialias 1
 defaults write com.apple.Terminal "Default Window Settings" "Pro"
 defaults write com.apple.Terminal "Startup Window Settings" "Pro"
-
 # New Finder windows use ~
 defaults write com.apple.finder NewWindowTarget -string "PfHm"
-
 # don't show mounted volumes on desktop
 defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -int 0
 defaults write com.apple.finder ShowRemovableMediaOnDesktop -int 0
-
 # finder show all file extensions
 defaults write NSGlobalDomain AppleShowAllExtensions -bool true
-
 # set menubar clock to 24h with date and seconds
 defaults write com.apple.menuextra.clock DateFormat -string 'EEE MMM d  H:mm:ss'
-
 # set keyboard to be really fucking fast
-defaults write -g InitialKeyRepeat -int 15 # normal minimum is 15 (225 ms)
-defaults write -g KeyRepeat -int 1 # normal minimum is 2 (30 ms)
-
+# normal minimum is 15 (225 ms)
+defaults write NSGlobalDomain InitialKeyRepeat -int 15
+# normal minimum is 2 (30 ms)
+defaults write NSGlobalDomain KeyRepeat -int 1
 # safari debug stuff
 defaults write com.apple.Safari IncludeDevelopMenu -bool true
-defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true
+defaults write com.apple.Safari \
+	WebKitDeveloperExtrasEnabledPreferenceKey -bool true
 defaults write com.apple.Safari "com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled" -bool true
 defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
-
-
-# install three python modules systemwide, that's all
-# do the rest with pip install --user in homedir
-sudo easy_install pip
-sudo /usr/local/bin/pip install virtualenv
-sudo /usr/local/bin/pip install awscli
-
-# set default inputrc:
+######################################################### set default inputrc
 cat > ~/.inputrc <<EOF
 set show-all-if-ambiguous on
 set completion-ignore-case on
@@ -114,17 +63,14 @@ set show-all-if-unmodified on
 set completion-map-case on
 set horizontal-scroll-mode Off
 EOF
-
-# install homebrew under homedir
+############################################## install homebrew under homedir
 if [[ ! -d ~/Library/Homebrew ]]; then
-	mkdir -p ~/Library/Homebrew
-	cd ~/Library/Homebrew
-	curl -fsSL https://github.com/Homebrew/brew/tarball/master | \
-		tar --strip-components 1 -xvf -
+    mkdir -p ~/Library/Homebrew
+    cd ~/Library/Homebrew
+    curl -fsSL https://github.com/Homebrew/brew/tarball/master | \
+        tar --strip-components 1 -xvf -
 fi
-
-# setup modular bashrc.d and profile.d
-if [[ ! -d ~/Library/bashrc.d ]]; then
+######################################## setup modular bashrc.d and profile.d
 cat > ~/.bashrc <<'EOF'
 # do not edit this file. put files in the dir below.
 for FN in $HOME/Library/bashrc.d/*.sh ; do
@@ -133,9 +79,6 @@ done
 EOF
 mkdir -p ~/Library/bashrc.d
 touch ~/Library/bashrc.d/keep.sh
-fi
-
-if [[ ! -d ~/Library/profile.d ]]; then
 cat > ~/.profile <<'EOF'
 # do not edit this file. put files in the dir below.
 source ~/.bashrc
@@ -145,23 +88,22 @@ done
 EOF
 mkdir -p ~/Library/profile.d
 touch ~/Library/profile.d/keep.sh
-fi
-
-# install homebrew path
-if [[ ! -e ~/Library/bashrc.d/100homebrew.sh ]]; then
-    mkdir -p ~/Library/bashrc.d
-    echo 'export PATH+=":~/Library/Homebrew/bin"' > \
-        ~/Library/bashrc.d/100homebrew.sh
-    echo 'export PATH+=":~/Library/Homebrew/sbin"' >> \
-        ~/Library/bashrc.d/100homebrew.sh
-    echo 'export HOMEBREW_NO_ANALYTICS=1' >> \
-        ~/Library/bashrc.d/100homebrew.sh
-    echo 'export HOMEBREW_CASK_OPTS="--appdir=~/Applications"' > \
-        ~/Library/bashrc.d/100homebrewcaskdir.sh
-fi
-
-echo 'export PS1=\'\u@\h:\w\\$ \'' > ~/Library/bashrc.d/000.ps1.sh
-
+####################################################### install homebrew path
+cat > ~/Library/bashrc.d/100homebrew.sh <<'EOF'
+export PATH+=":$HOME/Library/Homebrew/bin"
+export PATH+=":$HOME/Library/Homebrew/sbin"
+export HOMEBREW_NO_ANALYTICS=1
+EOF
+####################################### Set caskroom to install under homedir
+echo '
+cat > ~/Library/bashrc.d/100homebrewcaskdir.sh <<'EOF'
+export HOMEBREW_CASK_OPTS="--appdir=$HOME/Applications"
+EOF
+##################################################################### set PS1
+cat > ~/Library/bashrc.d/000.ps1.sh <<'EOF'
+export PS1='\u@\h:\w\\$ '
+EOF
+############################################################ enable git prompt
 cat > ~/Library/bashrc.d/200.git-prompt.sh <<'EOF'
 if [ -f "$(brew --prefix bash-git-prompt)/share/gitprompt.sh" ]; then
   GIT_PROMPT_THEME=Default
@@ -169,17 +111,46 @@ if [ -f "$(brew --prefix bash-git-prompt)/share/gitprompt.sh" ]; then
   source "$(brew --prefix bash-git-prompt)/share/gitprompt.sh"
 fi
 EOF
+########################################## enable bash completion in homebrew
+cat > ~/Library/bashrc.d/900.homebrew-completion.sh <<'EOF'
+if [ -f $(brew --prefix)/etc/bash_completion ]; then
+    . $(brew --prefix)/etc/bash_completion
+fi
+EOF
+################################################################### GPG Agent
+cat > ~/Library/profile.d/900.gpg-agent.sh <<'EOF'
+# check for existing running agent info
+if [[ -e $HOME/.gpg-agent-info ]]; then
+    source $HOME/.gpg-agent-info
+    export GPG_AGENT_INFO SSH_AUTH_SOCK SSH_AGENT_PID
+fi
 
-# set homebrew path:
+# test existing agent, remove info file if not working
+ssh-add -L 2>/dev/null >/dev/null || rm -f $HOME/.gpg-agent-info
+
+# if no info file, start up potentially-new, working agent
+if [[ ! -e $HOME/.gpg-agent-info ]]; then
+    gpg-agent --enable-ssh-support --daemon --write-env-file \
+        2>&1 >/dev/null
+fi
+
+# load up new agent info
+if [[ -e $HOME/.gpg-agent-info ]]; then
+    source $HOME/.gpg-agent-info
+    export GPG_AGENT_INFO SSH_AUTH_SOCK SSH_AGENT_PID
+fi
+EOF
+#############################################################################
+### load up profile scripts / paths for the rest of this configuration script
 source ~/.profile
-
+####################################################### install caskroom apps
 if [[ ! -d ~/Applications ]]; then
     mkdir -p ~/Applications
 fi
-
 brew tap caskroom/cask
-
 CASKS="
+	atom
+	disk-inventory-x
 	github-desktop
 	google-chrome
 	google-drive
@@ -190,13 +161,10 @@ CASKS="
 	slack
 	sublime-text
 "
-
 for CASK in $CASKS ; do
     brew cask install $CASK
 done	
-
-# install homebrew packages
-
+#################################################### install homebrew packages
 HOMEBREW_PKGS="
 	autoconf
 	automake
@@ -228,7 +196,6 @@ HOMEBREW_PKGS="
 	jq
 	keybase
 	lame
-	lame
 	mobile-shell
 	mtr
 	mutt
@@ -258,4 +225,7 @@ HOMEBREW_PKGS="
 for PKG in $HOMEBREW_PKGS ; do
     brew install $PKG
 done
+
+############################################# look for vimrc in google drive
+ln -s ~/Google\ Drive/Dotfiles/vimrc ~/.vimrc
 
