@@ -47,6 +47,7 @@ defaults write com.apple.sharingd DiscoverableMode Everyone
 defaults write NSGlobalDomain AppleShowAllExtensions -bool true
 # set menubar clock to 24h with date and seconds
 defaults write com.apple.menuextra.clock DateFormat -string 'EEE MMM d  H:mm:ss'
+defaults write NSGlobalDomain AppleICUForce24HourTime -bool true
 # set keyboard to be really fucking fast
 # normal minimum is 15 (225 ms)
 defaults write NSGlobalDomain InitialKeyRepeat -int 15

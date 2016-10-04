@@ -2,5 +2,4 @@
 
 # bugs
 
-* add homebrew/sbin to path
-
+* is slow
