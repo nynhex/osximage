@@ -39,6 +39,8 @@ defaults write com.apple.finder ShowStatusBar -int 1
 # don't show mounted volumes on desktop
 defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -int 0
 defaults write com.apple.finder ShowRemovableMediaOnDesktop -int 0
+# set textedit to edit plain text by default:
+defaults write com.apple.TextEdit RichText -int 0
 # set airdrop/bluetooth to be discoverable by everyone in range
 defaults write com.apple.sharingd DiscoverableMode Everyone
 # finder show all file extensions
