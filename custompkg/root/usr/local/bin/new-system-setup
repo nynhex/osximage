@@ -18,6 +18,9 @@ sudo defaults write /Library/Preferences/com.apple.alf stealthenabled -bool fals
 # hush time machine
 sudo defaults write /Library/Preferences/com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
 
+# disable spotlight phone-home systemwide (belt and suspenders)
+echo "127.0.0.1 api.smoot.apple.com" | sudo tee -a /etc/hosts
+
 # update software
 sudo softwareupdate -i -a
 
