@@ -5,3 +5,5 @@ touch "$3"/var/db/.AppleDiagnosticsSetupDone
 touch "$3"/var/db/.AppleSetupDone
 
 chmod a+rx "$3"/usr/local/bin/*
+chmod -R a+r "$3"/etc/skel
+
