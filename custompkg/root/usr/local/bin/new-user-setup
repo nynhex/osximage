@@ -1,10 +1,10 @@
 #!/bin/bash
 
-# Copy files from /etc/skel to homedir
+# Overlay files from /etc/skel to homedir
 rsync --no-owner -avP /etc/skel/ $HOME/
 
 # run modular setup scripts
 for FN in $HOME/Library/user-setup/*.sh ; do
-    source $FN
-    rm $FN
+    bash "$FN"
+    rm "$FN"
 done
