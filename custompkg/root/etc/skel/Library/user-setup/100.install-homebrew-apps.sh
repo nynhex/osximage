@@ -59,6 +59,7 @@ HOMEBREW_PKGS="
 	watch
 	wget
 	whatmask
+    corelocationcli
 "
 
 for PKG in $HOMEBREW_PKGS ; do
