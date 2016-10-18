@@ -60,6 +60,8 @@ HOMEBREW_PKGS="
 	wget
 	whatmask
     corelocationcli
+    heroku
+    postgres
 "
 
 for PKG in $HOMEBREW_PKGS ; do
