@@ -1,4 +1,8 @@
 # bash completion for awscli
-source `which aws_bash_completer`
+if which aws_bash_completer 2>&1 >/dev/null; then
+    source `which aws_bash_completer`
+fi
 # bash completion for elastic beanstalk
-source `which eb_completion.bash`
+if which eb_completion.bash 2>&1 >/dev/null; then
+    source `which eb_completion.bash`
+fi
