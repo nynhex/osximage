@@ -5,6 +5,7 @@ source $HOME/.profile
 
 NPM_PKGS="
     coffee-script
+    yarn
 "
 
 for PKG in $NPM_PKGS ; do
