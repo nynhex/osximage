@@ -9,13 +9,15 @@ ssh-add -L 2>/dev/null >/dev/null || rm -f $HOME/.gpg-agent-info
 
 # if no info file, start up potentially-new, working agent
 if [[ ! -e $HOME/.gpg-agent-info ]]; then
-    gpg-agent \
-        --enable-ssh-support \
-        --daemon \
-        --write-env-file \
-        --use-standard-socket \
-        --pinentry-program $(brew --prefix)/bin/pinentry-mac \
-        2>&1 >/dev/null
+    if which gpg-agent 2>&1 >/dev/null ; then
+        gpg-agent \
+            --enable-ssh-support \
+            --daemon \
+            --write-env-file \
+            --use-standard-socket \
+            --pinentry-program $(brew --prefix)/bin/pinentry-mac \
+            2>&1 >/dev/null
+    fi
 fi
 
 # load up new agent info
