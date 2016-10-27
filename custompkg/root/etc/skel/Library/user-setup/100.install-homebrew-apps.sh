@@ -61,6 +61,7 @@ HOMEBREW_PKGS="
 	whatmask
     corelocationcli
     heroku
+    offlineimap
     postgres
 "
 
