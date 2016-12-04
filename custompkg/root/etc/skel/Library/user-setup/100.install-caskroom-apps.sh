@@ -24,6 +24,7 @@ CASKS="
 	slack
 	spotify
 	sublime-text
+	vlc
 	xscreensaver
 "
 
