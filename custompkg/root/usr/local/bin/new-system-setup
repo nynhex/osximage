@@ -33,8 +33,6 @@ sudo defaults write /Library/Preferences/com.apple.commerce AutoUpdateRestartReq
 sudo defaults write /Library/Preferences/com.apple.AppleFileServer guestAccess -bool false
 sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server AllowGuestAccess -bool false
 
-# install three python modules systemwide, that's all
-# do the rest with pip install --user in homedir
+# install pip so users can
+#     pip install --user <pkg>
 sudo easy_install pip
-sudo /usr/local/bin/pip install virtualenv
-sudo /usr/local/bin/pip install awscli

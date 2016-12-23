@@ -1,0 +1,8 @@
+set show-all-if-ambiguous on
+set completion-ignore-case on
+set completion-prefix-display-length 4
+Control-j: menu-complete
+Control-k: menu-complete-backward
+set show-all-if-unmodified on
+set completion-map-case on
+set horizontal-scroll-mode Off

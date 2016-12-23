@@ -2,13 +2,6 @@
 
 This is a repo for building an NBI (never-booted image) of an OS X (pron: oh ess **ten**) root partition, which can be easily and quickly (&lt;10m) imaged onto a Mac with the `asr` utility readily available on OSX boot media.
 
-## TODO / Known Bugs
-
-* `new-system-setup` tries to update some system python packages that are protected by System Integrity Protection and fails.
-    * fix: move those packages to the `new-user-setup` script instead (`pip install --user $PKG`)
-* a wrong password passed to `fdesetup` in `new-system-setup` offers no attempt to retry
-    * fix: put in shell loop based on exit code
-
 # HOWTO: Creating the NBI
 
 ## Prerequisites
