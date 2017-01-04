@@ -92,11 +92,11 @@ Copy the never-booted disk image (nbi) ending with `.dmg` to the root of the new
 
 # HOWTO: Using the Custom Image
 
-## 1/4 Initial Password
+## 1/5 Initial Password
 
 * The password for the `admin` user is `admin`.  Log in as admin.
 
-## 2/4 Create User Accounts
+## 2/5 Create User Accounts
 
 The example user in this document is John P Smith, username `jps`.  Replace the name and username with your own.
 
@@ -108,7 +108,7 @@ The example user in this document is John P Smith, username `jps`.  Replace the 
     * Real Name: `John Smith`
 * Create a third non-administrator local user account `personal` for personal use.
 
-## 3/4 Set Up Systemwide Configuration
+## 3/5 Set Up Systemwide Configuration
 
 * Log out of `admin` and into `jpsadmin`.
 * Delete the `admin` user in `System Preferences > Users & Groups`. Choose to delete the user's home folder.
@@ -119,7 +119,7 @@ The example user in this document is John P Smith, username `jps`.  Replace the 
         * This is for FileVault (FDE) to enable the specified user from the encrypted disk.
 * Wait for the script to finish, then enter `sudo reboot`.
 
-## 4/4 Set Up User-specific Configuration
+## 4/5 Set Up User-specific Configuration
 
 * Log in with your normal user. (e.g. `jps`)
 * You may log in to your personal iCloud account/Apple ID, however, **make sure you disable iCloud Drive as soon as you log in**.
@@ -132,7 +132,7 @@ The example user in this document is John P Smith, username `jps`.  Replace the 
 * Avoid installing any additional software to the machine unless strictly necessary.  Prefer web applications and built-in apps.
 * Do not install third-party software to `/Applications` except via the App Store.
 
-# Finally, Systemwide Security Software
+## 5/5 Finally, Systemwide Security Software
 
 * Little Snitch
 * Little Flocker
