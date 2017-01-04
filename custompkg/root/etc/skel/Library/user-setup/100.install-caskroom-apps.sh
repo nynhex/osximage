@@ -14,6 +14,7 @@ brew tap caskroom/cask
 
 CASKS="
 	atom
+	deluge
 	disk-inventory-x
 	github-desktop
 	google-chrome
