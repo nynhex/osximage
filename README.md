@@ -137,6 +137,11 @@ The example user in this document is John P Smith, username `jps`.  Replace the 
 * Little Snitch
 * Little Flocker
 
+## 6/5 Optional Manual Configs
+
+* Enable pretty native OS notifications for Chrome: `chrome://flags/#enable-native-notifications`
+* Re-enable Location Services
+
 # Credits
 
 * `DefaultDesktop.jpg`
