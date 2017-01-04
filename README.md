@@ -132,6 +132,11 @@ The example user in this document is John P Smith, username `jps`.  Replace the 
 * Avoid installing any additional software to the machine unless strictly necessary.  Prefer web applications and built-in apps.
 * Do not install third-party software to `/Applications` except via the App Store.
 
+# Finally, Systemwide Security Software
+
+* Little Snitch
+* Little Flocker
+
 # Credits
 
 * `DefaultDesktop.jpg`
