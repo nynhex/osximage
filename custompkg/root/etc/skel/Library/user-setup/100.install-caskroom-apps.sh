@@ -21,9 +21,11 @@ CASKS="
 	iterm2
 	keepassx
 	lastpass
+	little-snitch
 	slack
 	spotify
 	sublime-text
+	torbrowser
 	vlc
 	xscreensaver
 "
