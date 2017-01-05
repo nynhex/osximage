@@ -5,6 +5,8 @@ rsync --no-owner -avP /etc/skel/ $HOME/
 
 # run modular setup scripts
 for FN in $HOME/Library/user-setup/*.sh ; do
+    echo "new-user-setup: starting $(basename $FN)..."
     bash "$FN" 2>&1 | tee -a $HOME/Library/Logs/user-setup.log
     rm "$FN"
+    echo "new-user-setup: removed $(basename $FN)..."
 done
