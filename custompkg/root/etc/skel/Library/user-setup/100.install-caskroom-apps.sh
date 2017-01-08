@@ -29,6 +29,7 @@ CASKS="
 	torbrowser
 	vlc
 	xscreensaver
+	xquartz
 "
 
 for CASK in $CASKS ; do
