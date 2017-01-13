@@ -27,6 +27,8 @@ Per AutoDMG, you have to be on the same OS as you're building.  To build a 10.12
         
 ## My `packages.10.12`
 
+https://ipfs.io/ipfs/QmTvcpFitKXsNTLdVRWk6PHvFWUfddZH47umm1xZvJApts/packages.10.12
+
 ```
 48516a7b6e5286cc44ab30ff3c5aa171e0888519  200.BrotherPrinterDrivers.pkg
 ebf0abac1483fd6de9262e92b047dcc80ceabeab  200.CanonPrinterDrivers.pkg
