@@ -4,16 +4,16 @@
 # install the following to /Applications before proceeding:
 #     * CreateUserPkg
 #     * AutoDMG.app
-#     * the OSX installer (Install macOS Sierra.app)
+#     * the OSX installer (Install macOS High Sierra.app)
 #     * Xcode.app
 # to /Applications before proceeding.
 
 # Put additional big packages (e.g. printer drivers)
 # in  ~/Documents/packages.10.12/ before running
 
-OSX := /Applications/Install macOS Sierra.app
+OSX := /Applications/Install macOS High Sierra.app
 AUTODMG := /Applications/AutoDMG.app/Contents/MacOS/AutoDMG
-OUTPUT := $(shell date +%Y%m%d).osx.10.12.adminadmin.dmg
+OUTPUT := $(shell date +%Y%m%d).osx.$(shell sw_vers -productVersion).adminadmin.dmg
 
 default: $(OUTPUT)
 
@@ -31,6 +31,7 @@ $(OUTPUT): prepare custompkg/custom.pkg
 		--logfile - \
 		build \
 		-n "root" \
+		--filesystem apfs \
 		-u -U \
 		-o /tmp/output.dmg \
 		"$(OSX)" \
@@ -38,7 +39,6 @@ $(OUTPUT): prepare custompkg/custom.pkg
 		/Applications/AutoDMG.app \
 		/Applications/CreateUserPkg.app \
 		"$(OSX)" \
-		~/Documents/packages.$(shell sw_vers -productVersion)/*.pkg \
 		$(PWD)/custompkg/custom.pkg \
 		$(PWD)/pkgs/*.pkg && \
 		cp /tmp/output.dmg $(PWD)/$@
