@@ -30,6 +30,7 @@ HOMEBREW_PKGS="
 	go
 	gpg-agent
 	graphviz
+	httpie
 	homebrew/dupes/rsync
 	irssi
 	jq
