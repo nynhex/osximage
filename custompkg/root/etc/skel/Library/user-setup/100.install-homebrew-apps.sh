@@ -42,6 +42,7 @@ HOMEBREW_PKGS="
 	nmap
 	node
 	pbzip2
+	pgpdump
 	pinentry-mac
 	protobuf
 	pv
