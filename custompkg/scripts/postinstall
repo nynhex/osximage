@@ -66,6 +66,3 @@ fi
 
 chmod a+rx "$3"/usr/local/bin/*
 chmod -R a+rX "$3"/etc/skel
-
-# silence stupid java-not-installed popups:
-rm -rf "$3"/System/Library/Frameworks/JavaVM.framework
