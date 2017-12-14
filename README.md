@@ -15,8 +15,6 @@ Per AutoDMG, you have to be on the same OS as you're building.  To build a 10.12
         * [free download via App Store](https://itunes.apple.com/us/app/macos-sierra/id1127487414)
     * `AutoDMG.app`
         * [GitHub Download](https://github.com/MagerValp/AutoDMG/releases)
-    * `CreateUserPkg.app`
-        * [GitHub Pages Download](http://magervalp.github.io/CreateUserPkg/)
 
 * create `~/Documents/packages.10.12`
     * put in all those apple printer driver `pkg`s you can download
@@ -49,7 +47,7 @@ b77920f32f36f3229611ea0e10c01f2dad157ceb  20161003.EnhancedDictation.pkg
 
 Finally, just run `make` in the cloned repo to build the NBI.  You will need to enter your sudo password up front, **but don't go get coffee yet**... AutoDMG will ask for it again about 30-60 seconds later.  *Then* go and kill an hour.
 
-The OSX Installer .app, AutoDMG, CreateUserPkg, and Xcode (for `make`) will all be included in the built image, so if you're *using* the image so built it will have everything you need to make further images later.
+The OSX Installer .app, AutoDMG, and Xcode (for `make`) will all be included in the built image, so if you're *using* the image so built it will have everything you need to make further images later.
 
 If you aren't installing any extra packages, edit the `Makefile` to remove the `~/packages.10.12/*.pkg` part.
 
@@ -68,9 +66,9 @@ Get all data to be saved *off* of target system.  Recommended: install Google Dr
 
 e.g. USB disk named "Untitled":
 
-    sudo /Applications/Install\ macOS\ Sierra.app/Contents/Resources/createinstallmedia \
+    sudo /Applications/Install\ macOS\ High\ Sierra.app/Contents/Resources/createinstallmedia \
       --volume /Volumes/Untitled \
-      --applicationpath "/Applications/Install macOS Sierra.app"
+      --applicationpath "/Applications/Install macOS High Sierra.app"
 
 ## Copy image to USB
 
