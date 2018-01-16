@@ -13,8 +13,6 @@ if [[ ! -e $HOME/.gpg-agent-info ]]; then
         gpg-agent \
             --enable-ssh-support \
             --daemon \
-            --write-env-file \
-            --use-standard-socket \
             --pinentry-program $(brew --prefix)/bin/pinentry-mac \
             2>&1 >/dev/null
     fi

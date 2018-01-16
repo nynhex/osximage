@@ -21,6 +21,7 @@ CASKS="
 	google-drive
 	iterm2
 	keepassx
+	keybase
 	lastpass
 	little-snitch
 	slack

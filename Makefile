@@ -37,11 +37,10 @@ $(OUTPUT): prepare custompkg/custom.pkg
 		"$(OSX)" \
 		/Applications/Xcode.app \
 		/Applications/AutoDMG.app \
-		/Applications/CreateUserPkg.app \
 		"$(OSX)" \
-		$(PWD)/custompkg/custom.pkg \
-		$(PWD)/pkgs/*.pkg && \
-		cp /tmp/output.dmg $(PWD)/$@
+		"$(PWD)"/custompkg/custom.pkg \
+		"$(PWD)"/pkgs/*.pkg && \
+		cp /tmp/output.dmg "$(PWD)"/$@
 
 clean:
 	rm -f *.dmg /tmp/output.dmg custompkg/*.pkg

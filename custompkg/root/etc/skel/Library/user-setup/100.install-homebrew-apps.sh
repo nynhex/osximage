@@ -34,7 +34,6 @@ HOMEBREW_PKGS="
 	homebrew/dupes/rsync
 	irssi
 	jq
-	keybase
 	lame
 	mobile-shell
 	mtr
