@@ -24,6 +24,7 @@ CASKS="
 	keybase
 	lastpass
 	little-snitch
+	sketch
 	slack
 	spotify
 	sublime-text
