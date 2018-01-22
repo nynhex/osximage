@@ -14,7 +14,7 @@ if [[ ! -e $HOME/.gpg-agent-info ]]; then
             --enable-ssh-support \
             --daemon \
             --pinentry-program $(brew --prefix)/bin/pinentry-mac \
-            2>&1 >/dev/null
+            2> /dev/null > $HOME/.gpg-agent-info
     fi
 fi
 
