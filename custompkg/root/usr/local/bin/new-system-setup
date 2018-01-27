@@ -7,7 +7,8 @@ sudo xcodebuild -license accept
 sudo fdesetup enable
 
 # disable hibernate
-sudo rm /private/var/vm/sleepimage
+# SIP prevents this rm, sadly
+#sudo rm -f /private/var/vm/sleepimage
 sudo pmset -a hibernatemode 0
 
 # enable application firewall
