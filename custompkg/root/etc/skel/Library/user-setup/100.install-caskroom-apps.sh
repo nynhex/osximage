@@ -16,7 +16,6 @@ CASKS="
 	atom
 	deluge
 	disk-inventory-x
-	github-desktop
 	google-chrome
 	google-drive
 	iterm2
