@@ -48,6 +48,7 @@ HOMEBREW_PKGS="
 	pv
 	pwgen
 	python3
+	rust
 	socat
 	sox
 	speedtest_cli
