@@ -12,6 +12,7 @@ fi
 # install caskroom
 brew tap caskroom/cask
 
+# no google-drive-file-stream because it requires admin privs and installs to /Applications systemwide
 CASKS="
         anki
 	atom
@@ -23,7 +24,6 @@ CASKS="
 	expandrive
 	google-chrome
 	google-cloud-sdk
-	google-drive-file-stream
 	iterm2
 	keepassx
 	keybase
