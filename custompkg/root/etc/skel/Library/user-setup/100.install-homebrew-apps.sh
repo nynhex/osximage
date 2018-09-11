@@ -36,7 +36,7 @@ HOMEBREW_PKGS="
 	jq
 	kubernetes-cli
 	lame
-	mobile-shell
+	mosh
 	mtr
 	mutt
 	nmap
