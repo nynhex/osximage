@@ -13,3 +13,11 @@ for PKG in $NPM_PKGS ; do
     # installed npm, i.e. in ~/Library/Homebrew, not actually systemwide
     npm install -g $PKG
 done
+
+YARN_PKGS="
+    now
+"
+
+for PKG in $YARN_PKGS ; do
+    yarn global add $PKG
+done
