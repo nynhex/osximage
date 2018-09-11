@@ -34,6 +34,7 @@ HOMEBREW_PKGS="
 	homebrew/dupes/rsync
 	irssi
 	jq
+	kubernetes-cli
 	lame
 	mobile-shell
 	mtr
