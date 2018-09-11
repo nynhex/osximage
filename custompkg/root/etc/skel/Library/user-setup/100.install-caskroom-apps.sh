@@ -17,6 +17,7 @@ CASKS="
 	deluge
 	disk-inventory-x
 	google-chrome
+	google-cloud-sdk
 	iterm2
 	keepassx
 	keybase
