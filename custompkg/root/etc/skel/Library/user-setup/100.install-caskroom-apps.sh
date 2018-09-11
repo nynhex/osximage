@@ -13,16 +13,23 @@ fi
 brew tap caskroom/cask
 
 CASKS="
+        anki
 	atom
+	dashlane
+	1password
+	1password-cli
 	deluge
 	disk-inventory-x
+	expandrive
 	google-chrome
 	google-cloud-sdk
+	google-drive-file-stream
 	iterm2
 	keepassx
 	keybase
 	lastpass
 	little-snitch
+	minikube
 	sketch
 	slack
 	spotify
