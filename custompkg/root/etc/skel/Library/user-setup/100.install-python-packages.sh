@@ -1,6 +1,7 @@
 PYTHON_PKGS="
     awscli
     awsebcli
+    pipenv
     virtualenv
 "
 
