@@ -4,6 +4,7 @@
 source $HOME/.profile
 
 HOMEBREW_PKGS="
+        asciinema
 	autoconf
 	automake
 	bash-completion
@@ -63,10 +64,10 @@ HOMEBREW_PKGS="
 	watch
 	wget
 	whatmask
-    corelocationcli
-    heroku
-    offlineimap
-    postgres
+        corelocationcli
+        heroku
+        offlineimap
+        postgres
 "
 
 for PKG in $HOMEBREW_PKGS ; do
