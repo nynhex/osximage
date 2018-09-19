@@ -34,6 +34,7 @@ CASKS="
 	slack
 	spotify
 	sublime-text
+	syncthing-app
 	torbrowser
 	vlc
 	xscreensaver
