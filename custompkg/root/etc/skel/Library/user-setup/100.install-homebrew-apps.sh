@@ -24,7 +24,6 @@ HOMEBREW_PKGS="
     fish
     flac
     geoip
-    ghc
     gist
     git
     gnupg
