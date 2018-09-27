@@ -44,6 +44,7 @@ HOMEBREW_PKGS="
     nmap
     node
     offlineimap
+    par2
     pbzip2
     pgpdump
     pinentry-mac
