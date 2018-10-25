@@ -41,6 +41,7 @@ HOMEBREW_PKGS="
     mosh
     mtr
     mutt
+    neovim
     nmap
     node
     offlineimap
