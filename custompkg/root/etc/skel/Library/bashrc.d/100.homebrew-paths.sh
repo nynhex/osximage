@@ -1,2 +1,2 @@
-export PATH+=":$HOME/Library/Homebrew/bin"
-export PATH+=":$HOME/Library/Homebrew/sbin"
+export PATH="$HOME/Library/Homebrew/sbin:$PATH"
+export PATH="$HOME/Library/Homebrew/bin:$PATH"
