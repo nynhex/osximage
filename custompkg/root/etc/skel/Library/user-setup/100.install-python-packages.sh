@@ -2,6 +2,7 @@ PYTHON_PKGS="
     awscli
     awsebcli
     pipenv
+    powerline-shell
     virtualenv
 "
 

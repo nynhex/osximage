@@ -34,7 +34,7 @@ CASKS="
     spotify
     sublime-text
     syncthing-app
-    torbrowser
+    tor-browser
     vlc
     xscreensaver
 "
