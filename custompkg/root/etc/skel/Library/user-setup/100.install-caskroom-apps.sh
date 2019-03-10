@@ -35,6 +35,7 @@ CASKS="
     sublime-text
     syncthing-app
     tor-browser
+    vcv-rack
     vlc
     xscreensaver
 "
