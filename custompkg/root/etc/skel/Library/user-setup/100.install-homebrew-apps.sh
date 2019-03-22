@@ -34,6 +34,7 @@ HOMEBREW_PKGS="
     heroku
     homebrew/dupes/rsync
     httpie
+    httrack
     irssi
     jq
     kubernetes-cli

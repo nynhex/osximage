@@ -15,6 +15,7 @@ brew tap caskroom/cask
 CASKS="
     1password
     1password-cli
+    ableton-live-suite
     anki
     atom
     dashlane
@@ -23,6 +24,7 @@ CASKS="
     expandrive
     google-chrome
     google-cloud-sdk
+    handbrake
     iterm2
     keepassx
     keybase
