@@ -64,6 +64,7 @@ HOMEBREW_PKGS="
     terraform
     tor
     torsocks
+    trash
     unrar
     unzip
     vimpager
