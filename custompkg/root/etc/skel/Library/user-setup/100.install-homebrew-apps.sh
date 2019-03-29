@@ -10,6 +10,7 @@ HOMEBREW_PKGS="
     bash-completion
     bash-git-prompt
     bonnie++
+    bwm-ng
     byobu
     cmake
     corelocationcli
