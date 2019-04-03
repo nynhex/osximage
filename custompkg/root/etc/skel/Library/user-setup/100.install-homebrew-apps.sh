@@ -47,6 +47,7 @@ HOMEBREW_PKGS="
     nmap
     node
     offlineimap
+    p7zip
     par2
     pbzip2
     pgpdump
