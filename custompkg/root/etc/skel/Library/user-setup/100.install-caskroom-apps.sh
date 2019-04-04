@@ -31,6 +31,7 @@ CASKS="
     lastpass
     little-snitch
     minikube
+    openscad
     sketch
     slack
     spotify
